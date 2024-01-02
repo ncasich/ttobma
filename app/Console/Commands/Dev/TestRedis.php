@@ -16,6 +16,6 @@ class TestRedis extends Command
     public function handle()
     {
         Cache::store('redis')->forever('ping2', 'pong');
-//        dd(Cache::store('redis')->get('ping2'));
+        dd(Cache::store('redis')->get('ping2'));
     }
 }

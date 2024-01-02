@@ -1,0 +1,3 @@
+FROM nginx:1.25.3
+ADD ./docker/nginx/default.conf /etc/nginx/templates/default.conf.template
+COPY ./docker/nginx/ssl /etc/nginx/ssl

@@ -1,18 +1,4 @@
-#include:
-#    - ./docker/cdb/cdb.yml
-
 services:
-#    redis:
-#        container_name: ttobma-redis
-#        restart: unless-stopped
-#        build:
-#            context: .
-#            dockerfile: docker/redis.docker
-#        command: redis-server --save 20 1
-#        ports:
-#            - 6379:${REDIS_PORT}
-#        networks:
-#            - ttobma
     php:
         container_name: ttonew-php
         restart: unless-stopped
@@ -23,39 +9,35 @@ services:
         volumes:
             - ./:${APP_ROOT}
         networks:
-            - ttobma
-            - ttobma-old_ttobma
+            - ttobma-new
+            - ttobma-old
 
-#    nginx:
-#        container_name: ttobma-nginx
-#        restart: unless-stopped
-#        build:
-#            context: .
-#            dockerfile: docker/nginx.docker
+    nginx:
+        container_name: ttonew-nginx
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: docker/nginx.docker
+#        links:
+#            - ttobma-nginx
 #        ports:
-#            - 443:${APP_PORT}
-#        environment:
-#            - APP_DOMAIN=${APP_DOMAIN}
-#            - APP_ROOT=${APP_ROOT}
-#            - APP_PORT=${APP_PORT}
-#        volumes:
-#            - ./:${APP_ROOT}
-#        networks:
-#            ttobma:
-#                aliases:
-#                    - ${APP_URL}
-#        depends_on:
-#            - php
-#            - cdb-na
-#            - cdb-eu
-#            - cdb-cn
+#            - ${APP_PORT}:${APP_PORT}
+        environment:
+            - APP_DOMAIN=${APP_DOMAIN}
+            - APP_ROOT=${APP_ROOT}
+            - APP_PORT=${APP_PORT}
+        volumes:
+            - ${APP_ROOT}:${APP_ROOT}
+        networks:
+            ttobma-old:
+                aliases:
+                    - ${APP_URL}
+        depends_on:
+            - php
 
 networks:
-    ttobma:
+    ttobma-new:
         driver: bridge
-    ttobma-old_ttobma:
+    ttobma-old:
         external: true
-
-#volumes:
-#    cache:
-#        driver: local
+        name: ttobma-old_ttobma-old

@@ -7,37 +7,14 @@ services:
             context: ./
             dockerfile: docker/php.docker
         volumes:
-            - ./:${APP_ROOT}
+            - ${APP_ROOT}:${APP_ROOT}
         networks:
             - ttobma-new
             - ttobma-old
 
-    nginx:
-        container_name: ttonew-nginx
-        restart: unless-stopped
-        build:
-            context: .
-            dockerfile: docker/nginx.docker
-#        links:
-#            - ttobma-nginx
-#        ports:
-#            - ${APP_PORT}:${APP_PORT}
-        environment:
-            - APP_DOMAIN=${APP_DOMAIN}
-            - APP_ROOT=${APP_ROOT}
-            - APP_PORT=${APP_PORT}
-        volumes:
-            - ${APP_ROOT}:${APP_ROOT}
-        networks:
-            ttobma-old:
-                aliases:
-                    - ${APP_URL}
-        depends_on:
-            - php
-
 networks:
     ttobma-new:
         driver: bridge
+        name: ttobma-new
     ttobma-old:
         external: true
-        name: ttobma-old_ttobma-old

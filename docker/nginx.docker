@@ -1,3 +1,9 @@
 FROM ttobma-old-nginx
-ADD ./docker/nginx/default.conf /etc/nginx/templates/ttobma-new.conf.template
+
+# Install vim (when needed) to be able to check config
+RUN apt-get update && apt-get install -y nano
+
+#Setting up ttobma old domain
+ADD ./docker/nginx/default.conf /etc/nginx/templates/default.conf.template
 ADD ./docker/nginx/php_8.2.conf /etc/nginx/php_8.2.conf
+COPY ./docker/nginx/ssl /etc/nginx/ssl

@@ -24,3 +24,7 @@ Route::get('/test', function () {
 Route::get('/new-test', function () {
     return '<h3>Hello from NEW!!!</h3>';
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

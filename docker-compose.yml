@@ -9,6 +9,7 @@ services:
         ports:
             - 5173:5173
         volumes:
+            - /var/www/html:/var/www/html
             - ${APP_ROOT}:${APP_ROOT}
         networks:
             - ttobma-new

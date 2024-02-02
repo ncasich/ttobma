@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Dev;
 
+use App\Models\User\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,13 @@ class CdbTest extends Command
 
     public function handle()
     {
+        $this->testUser();
         dd(DB::table('users')->where('mysql_id', 1)->get());
+    }
+
+    protected function testUser()
+    {
+        $user = User::factory()->create();
+        dd($user->id);
     }
 }

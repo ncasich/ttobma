@@ -40,24 +40,27 @@ class Model extends BaseModel
         }
     }
 
-//    protected function performInsert(Builder $query)
-//    {
-//        if ($this->fireModelEvent('creating') === false) {
-//            return false;
-//        }
-//
-//        if ($this->usesTimestamps()) {
-//            $this->updateTimestamps();
-//        }
-//
-//        if (!empty($this->attributes)) {
-//            $this->insertAndSetId($query, $this->attributes);
-//        }
-//
-//        $this->exists = $this->wasRecentlyCreated = true;
-//        $this->fireModelEvent('created', false);
-//        return true;
-//    }
+    protected function performInsert(Builder $query)
+    {
+        if ($this->usesUniqueIds()) {
+            $this->setUniqueIds();
+        }
+
+        if ($this->fireModelEvent('creating') === false) {
+            return false;
+        }
+
+        if ($this->usesTimestamps()) {
+            $this->updateTimestamps();
+        }
+
+        if (!empty($attributes = $this->getAttributesForInsert())) {
+            $this->insertAndSetId($query, $attributes);
+            $this->fireModelEvent('created', false);
+        }
+
+        return true;
+    }
 
 //    protected function newBaseQueryBuilder()
 //    {

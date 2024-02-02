@@ -76,7 +76,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => 'cache',
             'lock_connection' => 'default',
         ],
 
@@ -106,7 +106,6 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', 'laravel'),
     'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
 
 ];

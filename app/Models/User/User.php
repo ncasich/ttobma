@@ -34,4 +34,9 @@ class User extends BaseUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return implode(' ', [$this->first_name, $this->last_name]);
+    }
 }

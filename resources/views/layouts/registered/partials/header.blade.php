@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-main shadow-sm">
+    <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
         <img class="header-logo" src="{{asset('/img/logos/tto_bma/svg/horiz-rev-min.svg')}}" alt="TTO BMA">
     </a>
@@ -8,7 +9,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse container" id="navbar-content">
+    <div class="collapse navbar-collapse" id="navbar-content">
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav me-auto">
 
@@ -34,7 +35,7 @@
             </li>
         </ul>
     </div>
-
+    </div>
 </nav>
 
 <div class="container">

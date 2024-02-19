@@ -18,7 +18,11 @@ export default ({mode}) => {
         plugins: [
             laravel({
                 input: [
+                    // styles
                     'resources/sass/app.scss',
+                    'resources/sass/videos/style.scss',
+
+                    // scripts
                     'resources/js/app.js',
                 ],
                 refresh: true,
